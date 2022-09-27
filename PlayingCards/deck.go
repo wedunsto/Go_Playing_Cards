@@ -8,6 +8,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -54,4 +55,17 @@ func (d deck) saveToFile(filename string) error {
 	data := []byte(d.toString())
 	//0666: Anyone can read and write to file
 	return ioutil.WriteFile(filename, data, 0666)
+}
+
+// Load a deck of cards from a file
+func loadFromFile(filename string) deck {
+	data, err := os.ReadFile(filename)
+	if err == nil {
+		deckString := string(data)
+		deckStringSlice := strings.Split(deckString, ",")
+		deckResult := deck(deckStringSlice)
+		return deckResult
+	}
+	fmt.Println("Error: ", err)
+	return deck{}
 }
