@@ -5,6 +5,8 @@ Objectives:
 */
 package main
 
+import "fmt"
+
 type deck []string //A deck is a slice of strings
 
 func newDeck() deck {
@@ -20,4 +22,12 @@ func newDeck() deck {
 		}
 	}
 	return cards
+}
+
+//Create a receiver function of type deck
+func (d deck) printDeck() {
+	//Reference the instance variable d of the created deck
+	for _, card := range d {
+		fmt.Println(card)
+	}
 }
