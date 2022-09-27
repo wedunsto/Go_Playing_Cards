@@ -5,7 +5,10 @@ Objectives:
 */
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type deck []string //A deck is a slice of strings
 
@@ -24,7 +27,7 @@ func newDeck() deck {
 	return cards
 }
 
-//Create a receiver function of type deck
+// Create a receiver function of type deck
 func (d deck) printDeck() {
 	//Reference the instance variable d of the created deck
 	for _, card := range d {
@@ -32,9 +35,14 @@ func (d deck) printDeck() {
 	}
 }
 
-//Create a function with multiple return values
+// Create a function with multiple return values
 func deal(d deck, handSize int) (deck, deck) {
 	//d deck, handSize int: inputs
 	//deck, deck: two return values of type deck
 	return d[:handSize], d[handSize:]
+}
+
+// Return a string representation of a deck
+func (d deck) toString() string {
+	return strings.Join(d, ",")
 }
