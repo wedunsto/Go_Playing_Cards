@@ -31,3 +31,10 @@ func (d deck) printDeck() {
 		fmt.Println(card)
 	}
 }
+
+//Create a function with multiple return values
+func deal(d deck, handSize int) (deck, deck) {
+	//d deck, handSize int: inputs
+	//deck, deck: two return values of type deck
+	return d[:handSize], d[handSize:]
+}
