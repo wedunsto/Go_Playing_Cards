@@ -8,8 +8,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 type deck []string //A deck is a slice of strings
@@ -68,4 +70,18 @@ func loadFromFile(filename string) deck {
 	}
 	fmt.Println("Error: ", err)
 	return deck{}
+}
+
+// Shuffle all cards in a deck
+// Create useful random number generator with time and rand libraries
+func (d deck) shuffle() {
+	currentTime := time.Now().UnixNano()
+	randSource := rand.NewSource(currentTime)
+	randObject := rand.New(randSource) // Creator of random seed values
+
+	for i := range d {
+		newPosition := randObject.Intn(len(d) - 1)
+		// Swap the position of two cards
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }
